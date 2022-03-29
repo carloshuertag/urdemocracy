@@ -54,7 +54,7 @@ urdemocracy:
         users: collection<users>
 
 Constraints:
-    user can be a part of multiple collectives
+    User can be a part of multiple collectives
     Resource, Followup and Results depend on a existing Deliberation
     Multiple  Resources, and  Results can depend on a existing Deliberation.
     Only one followup can depend on  a existing result.

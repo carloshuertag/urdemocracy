@@ -4,6 +4,8 @@
     "description": "urdemocracy is a software tool to help decision making process in political societies focused on a participatory democracy paradigm",
     "main": "compile.js",
     "scripts": {
+        "build": "asb",
+        "build:debug": "asb --target debug",
         "test": "asp --nologo"
     },
     "repository": {
@@ -22,5 +24,12 @@
     "bugs": {
         "url": "https://github.com/huerta2502/urdemocracy/issues"
     },
-    "homepage": "https://github.com/huerta2502/urdemocracy#readme"
+    "homepage": "https://github.com/huerta2502/urdemocracy#readme",
+    "dependencies": {
+        "near-sdk-as": "^3.2.3"
+    },
+    "devDependencies": {
+        "@types/jest": "^27.4.1",
+        "shelljs": "^0.8.5"
+    }
 }
