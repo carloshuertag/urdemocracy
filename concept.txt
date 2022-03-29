@@ -1,0 +1,54 @@
+Carlos Huerta García
+A software tool to help decision making process in political societies focused on a participatory democracy paradigm
+Introduction:
+    Democratic axes -> informative, deliberative y participatory
+    Inform -> Organizational, financial, regulatory, scheduling an contact information.
+    Deliberate -> Discussion, debates, forums, propositions
+    Participate -> consulations, votes
+    Extra: Evaluate -> decision's evaluation
+
+urdemocracy:
+    informative axis: Information resource
+    Resource
+        resource name: string
+        resource type: string
+        topics: collection<string>
+        description: string
+        resource link:  string
+        resource timestamp: timestamp
+        deliberation: Deliberation
+        who is uploading: user
+    deliberative axis: Deliberation planning
+    Deliberation
+        deliberation name: string
+        topics: collection<string>
+        description: string
+        tool: string
+        resources: collection<resources>
+        deliberation date: date
+        who is hosting: user
+    participatory axis: Deliberaton results
+    Result
+        result: string
+        description:  string
+        result checkout link: string
+        deliberation: deliberation
+        agreed result: result
+        result timestamp: timestamp
+        who is reporting: user
+    Evaluation extra:  Deliberation results follow up
+    Followup
+        status: string
+        monitoring/evaluation link: string
+        evaluation date: date
+        deliberation: Deliberation
+        who is following up: user
+    User
+        user name:  string
+        colectives: collection<colective>
+        mail: string
+    Collective
+        collective name: string
+        users: collection<users>
+
+Constraints:

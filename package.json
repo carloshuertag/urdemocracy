@@ -1,0 +1,26 @@
+{
+    "name": "urdemocracy",
+    "version": "1.0.0",
+    "description": "urdemocracy is a software tool to help decision making process in political societies focused on a participatory democracy paradigm",
+    "main": "compile.js",
+    "scripts": {
+        "test": "asp --nologo"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/huerta2502/urdemocracy.git"
+    },
+    "keywords": [
+        "'participatory",
+        "democracy'",
+        "'blockchain'",
+        "'near",
+        "protocol'"
+    ],
+    "author": "huerta2502",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/huerta2502/urdemocracy/issues"
+    },
+    "homepage": "https://github.com/huerta2502/urdemocracy#readme"
+}
