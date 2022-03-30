@@ -26,7 +26,8 @@ urdemocracy:
         topics: collection<string>
         description: string
         tool: string
-        resources: collection<resources>
+        resources: collection<resource>
+        results: collection<result>
         deliberation date: date
         who is hosting: user
     participatory axis: Deliberaton results
@@ -44,6 +45,7 @@ urdemocracy:
         monitoring/evaluation link: string
         evaluation date: date
         deliberation: Deliberation
+        result: Result
         who is following up: user
     User
         user name:  string
@@ -51,6 +53,7 @@ urdemocracy:
         mail: string
     Collective
         collective name: string
+        collective info link: string
         users: collection<users>
 
 Constraints:
