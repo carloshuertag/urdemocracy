@@ -82,10 +82,49 @@ export class User {
  */
 @nearBindgen
 export class Collective {
-    collectiveId: string;
-    name: string;
-    infoLink: string;
-    collectives: PersistentSet<string>;
+    #collectiveId: string;
+    #name: string;
+    #infoLink: string;
+    #users: PersistentSet<string>;
+
+    constructor( collectiveId: string, name: string, infoLink: string) {
+        this.#collectiveId = collectiveId;
+        this.#name = name;
+        this.#infoLink = infoLink;
+        this.#users = new PersistentSet<string>(collectiveId + "_users");
+    }
+
+    get collectiveId(): string {
+        return this.#collectiveId;
+    }
+
+    set collectiveId(collectiveId: string) {
+        this.#collectiveId = collectiveId;
+    }
+
+    get name(): string {
+        return this.#name;
+    }
+
+    set name(name: string) {
+        this.#name = name;
+    }
+
+    get infoLink(): string {
+        return this.#infoLink;
+    }
+
+    set infoLink(infoLink: string) {
+        this.#infoLink = infoLink;
+    }
+
+    addUser(userId: string): void {
+        this.#users.add(userId);
+    }
+
+    getUsers(): Array<string> {
+        return this.#users.values();
+    }
 
 }
 
