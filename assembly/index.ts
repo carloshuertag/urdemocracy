@@ -33,17 +33,27 @@ export class Contract {
         return true;
     }
 
-    createCollective(name: string, type: string, infoUrl: string): bool {
+    createCollective(name: string, type: string, infoUrl: string): string {
         if(name == "" || type == "" || infoUrl == "") {
             logging.log("Invalid parameters");
-            return false;
+            return "";
         }
         const exists = collectiveRegistry.contains(name + type + infoUrl);
         if(exists) {
             logging.log("Collective already in network");
-            return false;
+            return "";
         }
         collectiveRegistry.set(name + type + infoUrl, new Collective(name, type, infoUrl));
+        return name + type + infoUrl;
+    }
+
+    addUser2Collective(collectiveId: string, userId: string): bool {
+        const collective = collectiveRegistry.get(collectiveId);
+        if(!collective) {
+            logging.log("Collective not registered in the network");
+            return false;
+        }
+        collective.addUser(userId);
         return true;
     }
 
