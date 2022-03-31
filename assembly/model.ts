@@ -1,13 +1,10 @@
+export type Timestamp = u64;
 /**
  * 
  */
 import {
-    context, // visibility into account, contract and blockchain details
-    logging, // append to the execution environment log (appears in JS Developer Console when using near-api-js)
-    storage, // key-value store for the contract (used by PersistentMap, PersistentVector and PersistentDeque)
     PersistentUnorderedMap, // data structure that wraps storage to appear like an unordered Map
-    PersistentSet, // data structure that wraps storage to appear like a Set
-    ContractPromise // make asynchronous calls to other contracts and receive callbacks
+    PersistentSet // data structure that wraps storage to appear like a Set
 } from "near-sdk-as";
 
 /**
@@ -17,14 +14,14 @@ import {
 export class User {
     #accountId: string;
     #name: string;
-    #email: string;
+    #mail: string;
     #password: string;
     #collectives: PersistentSet<string>;
 
-    constructor( accountId: string, name: string, email: string, password: string) {
+    constructor( accountId: string, name: string, mail: string, password: string) {
         this.#accountId = accountId;
         this.#name = name;
-        this.#email = email;
+        this.#mail = mail;
         this.#password = password;
         this.#collectives = new PersistentSet<string>(accountId + "_collectives");
     }
@@ -45,12 +42,12 @@ export class User {
         this.#name = name;
     }
 
-    get email(): string {
-        return this.#email;
+    get mail(): string {
+        return this.#mail;
     }
 
-    set email(email: string) {
-        this.#email = email;
+    set email(mail: string) {
+        this.#mail = mail;
     }
 
     get password(): string {
@@ -77,12 +74,14 @@ export class User {
 export class Collective {
     #collectiveId: string;
     #name: string;
+    #type: string;
     #infoUrl: string;
     #users: PersistentSet<string>;
 
-    constructor(name: string, infoUrl: string) {
-        this.#collectiveId = name + infoUrl;
+    constructor(name: string, type: string, infoUrl: string) {
+        this.#collectiveId = name + type + infoUrl;
         this.#name = name;
+        this.#type = type;
         this.#infoUrl = infoUrl;
         this.#users = new PersistentSet<string>(this.#collectiveId + "_users");
     }
@@ -101,6 +100,14 @@ export class Collective {
 
     get infoUrl(): string {
         return this.#infoUrl;
+    }
+
+    set type(type: string) {
+        this.#type = type;
+    }
+
+    get type(): string {
+        return this.#type;
     }
 
     set infoUrl(infoUrl: string) {
@@ -234,10 +241,10 @@ export class Resource {
     #url: string;
     #deliberationId: string;
     #topics: PersistentSet<string>;
-    #timestamp: string;
+    #timestamp: Timestamp;
     #uploaderAccountId: string;
 
-    constructor(name: string, type: string, description: string, url: string, deliberationId: string, timestamp: string, uploaderAccountId: string) {
+    constructor(name: string, type: string, description: string, url: string, deliberationId: string, timestamp: Timestamp, uploaderAccountId: string) {
         this.#resourceId = url + deliberationId + timestamp + uploaderAccountId;
         this.#name = name;
         this.#type = type;
@@ -301,11 +308,11 @@ export class Resource {
         this.#topics.add(topic);
     }
 
-    get timestamp(): string {
+    get timestamp(): Timestamp {
         return this.#timestamp;
     }
 
-    set timestamp(timestamp: string) {
+    set timestamp(timestamp: Timestamp) {
         this.#timestamp = timestamp;
     }
 
@@ -329,10 +336,10 @@ export class Result {
     #deliberationId: string;
     #resultAgreement: string;
     #checkoutUrl: string;
-    #timestamp: string;
+    #timestamp: Timestamp;
     #checkerAccountId: string;
     
-    constructor(name: string, description: string, deliberationId: string, resultAgreementId: string, checkoutUrl: string, timestamp: string, checkerAccountId: string) {
+    constructor(name: string, description: string, deliberationId: string, resultAgreementId: string, checkoutUrl: string, timestamp: Timestamp, checkerAccountId: string) {
         this.#resultId = deliberationId + resultAgreementId + checkoutUrl + timestamp + checkerAccountId;
         this.#name = name;
         this.#description = description;
@@ -387,11 +394,11 @@ export class Result {
         this.#checkoutUrl = checkoutUrl;
     }
 
-    get timestamp(): string {
+    get timestamp(): Timestamp {
         return this.#timestamp;
     }
 
-    set timestamp(timestamp: string) {
+    set timestamp(timestamp: Timestamp) {
         this.#timestamp = timestamp;
     }
 
