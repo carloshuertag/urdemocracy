@@ -7,10 +7,7 @@ import {
     storage, // key-value store for the contract (used by PersistentMap, PersistentVector and PersistentDeque)
     PersistentUnorderedMap, // data structure that wraps storage to appear like an unordered Map
     PersistentSet, // data structure that wraps storage to appear like a Set
-    ContractPromise, // make asynchronous calls to other contracts and receive callbacks
-    base58, // utility base58 encoder
-    base64, // utility base64 encoder / decoder
-    math // utility math functions for hashing using SHA and Keccak as well as pseudo-random data
+    ContractPromise // make asynchronous calls to other contracts and receive callbacks
 } from "near-sdk-as";
 
 /**
@@ -25,7 +22,7 @@ export class User {
     #collectives: PersistentSet<string>;
 
     constructor( accountId: string, name: string, email: string, password: string) {
-        this.#accountId = accountId + email;
+        this.#accountId = accountId;
         this.#name = name;
         this.#email = email;
         this.#password = password;
