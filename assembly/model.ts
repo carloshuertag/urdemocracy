@@ -5,15 +5,12 @@ import {
     context, // visibility into account, contract and blockchain details
     logging, // append to the execution environment log (appears in JS Developer Console when using near-api-js)
     storage, // key-value store for the contract (used by PersistentMap, PersistentVector and PersistentDeque)
-    PersistentMap, // data structure that wraps storage to appear like a Map
-    PersistentVector, // data structure that wraps storage to appear like a Vector
-    PersistentDeque, // data structure that wraps storage to appear like a Deque
+    PersistentUnorderedMap, // data structure that wraps storage to appear like an unordered Map
     PersistentSet, // data structure that wraps storage to appear like a Set
     ContractPromise, // make asynchronous calls to other contracts and receive callbacks
     base58, // utility base58 encoder
     base64, // utility base64 encoder / decoder
-    math, // utility math functions for hashing using SHA and Keccak as well as pseudo-random data
-    utils, // utility type conversion and read_register
+    math // utility math functions for hashing using SHA and Keccak as well as pseudo-random data
 } from "near-sdk-as";
 
 /**
@@ -28,7 +25,7 @@ export class User {
     #collectives: PersistentSet<string>;
 
     constructor( accountId: string, name: string, email: string, password: string) {
-        this.#accountId = accountId;
+        this.#accountId = accountId + email;
         this.#name = name;
         this.#email = email;
         this.#password = password;
@@ -74,7 +71,6 @@ export class User {
     getCollectives(): Array<string> {
         return this.#collectives.values();
     }
-
 }
 
 /**
@@ -84,22 +80,18 @@ export class User {
 export class Collective {
     #collectiveId: string;
     #name: string;
-    #infoLink: string;
+    #infoUrl: string;
     #users: PersistentSet<string>;
 
-    constructor( collectiveId: string, name: string, infoLink: string) {
-        this.#collectiveId = collectiveId;
+    constructor(name: string, infoUrl: string) {
+        this.#collectiveId = name + infoUrl;
         this.#name = name;
-        this.#infoLink = infoLink;
-        this.#users = new PersistentSet<string>(collectiveId + "_users");
+        this.#infoUrl = infoUrl;
+        this.#users = new PersistentSet<string>(this.#collectiveId + "_users");
     }
 
     get collectiveId(): string {
         return this.#collectiveId;
-    }
-
-    set collectiveId(collectiveId: string) {
-        this.#collectiveId = collectiveId;
     }
 
     get name(): string {
@@ -110,12 +102,12 @@ export class Collective {
         this.#name = name;
     }
 
-    get infoLink(): string {
-        return this.#infoLink;
+    get infoUrl(): string {
+        return this.#infoUrl;
     }
 
-    set infoLink(infoLink: string) {
-        this.#infoLink = infoLink;
+    set infoUrl(infoUrl: string) {
+        this.#infoUrl = infoUrl;
     }
 
     addUser(userId: string): void {
@@ -125,7 +117,6 @@ export class Collective {
     getUsers(): Array<string> {
         return this.#users.values();
     }
-
 }
 
 /**
@@ -133,8 +124,105 @@ export class Collective {
  */
 @nearBindgen
 export class Deliberation {
-    name: string;
-    
+    #deliberationId: string;
+    #name: string;
+    #topics: PersistentSet<string>;
+    #description: string;
+    #tool: string;
+    #collectiveId: string;
+    #resources: PersistentSet<string>;
+    #results: PersistentSet<string>;
+    #deliberationDate: string;
+    #hostAccountId: string;
+
+    constructor(name: string, description: string, tool: string, collectiveId: string, deliberationDate: string, hostAccountId: string) {
+        this.#deliberationId = collectiveId + deliberationDate + hostAccountId;
+        this.#name = name;
+        this.#topics = new PersistentSet<string>(this.#deliberationId + "_topics");
+        this.#description = description;
+        this.#tool = tool;
+        this.#collectiveId = collectiveId;
+        this.#resources = new PersistentSet<string>(this.#deliberationId + "_resources");
+        this.#results = new PersistentSet<string>(this.#deliberationId + "_results");
+        this.#deliberationDate = deliberationDate;
+        this.#hostAccountId = hostAccountId;
+    }
+
+    get deliberationId(): string {
+        return this.#deliberationId;
+    }
+
+    get name(): string {
+        return this.#name;
+    }
+
+    set name(name: string) {
+        this.#name = name;
+    }
+
+    get topics(): Array<string> {
+        return this.#topics.values();
+    }
+
+    addTopic(topic: string): void {
+        this.#topics.add(topic);
+    }
+
+    get description(): string {
+        return this.#description;
+    }
+
+    set description(description: string) {
+        this.#description = description;
+    }
+
+    get tool(): string {
+        return this.#tool;
+    }
+
+    set tool(tool: string) {
+        this.#tool = tool;
+    }
+
+    get collectiveId(): string {
+        return this.#collectiveId;
+    }
+
+    set collectiveId(collectiveId: string) {
+        this.#collectiveId = collectiveId;
+    }
+
+    get resources(): Array<string> {
+        return this.#resources.values();
+    }
+
+    addResource(resource: string): void {
+        this.#resources.add(resource);
+    }
+
+    get results(): Array<string> {
+        return this.#results.values();
+    }
+
+    addResult(result: string): void {
+        this.#results.add(result);
+    }
+
+    get deliberationDate(): string {
+        return this.#deliberationDate;
+    }
+
+    set deliberationDate(deliberationDate: string) {
+        this.#deliberationDate = deliberationDate;
+    }
+
+    get hostAccountId(): string {
+        return this.#hostAccountId;
+    }
+
+    set hostAccountId(hostAccountId: string) {
+        this.#hostAccountId = hostAccountId;
+    }
 }
 
 /**
@@ -142,8 +230,95 @@ export class Deliberation {
  */
 @nearBindgen
 export class Resource {
-    name: string;
-    
+    #resourceId: string;
+    #name: string;
+    #type: string;
+    #description: string;
+    #url: string;
+    #deliberationId: string;
+    #topics: PersistentSet<string>;
+    #timestamp: string;
+    #uploaderAccountId: string;
+
+    constructor(name: string, type: string, description: string, url: string, deliberationId: string, timestamp: string, uploaderAccountId: string) {
+        this.#resourceId = url + deliberationId + timestamp + uploaderAccountId;
+        this.#name = name;
+        this.#type = type;
+        this.#description = description;
+        this.#url = url;
+        this.#deliberationId = deliberationId;
+        this.#topics = new PersistentSet<string>(this.#resourceId + "_topics");
+        this.#timestamp = timestamp;
+        this.#uploaderAccountId = uploaderAccountId;
+    }
+
+    get resourceId(): string {
+        return this.#resourceId;
+    }
+
+    get name(): string {
+        return this.#name;
+    }
+
+    set name(name: string) {
+        this.#name = name;
+    }
+
+    get type(): string {
+        return this.#type;
+    }
+
+    set type(type: string) {
+        this.#type = type;
+    }
+
+    get description(): string {
+        return this.#description;
+    }
+
+    set description(description: string) {
+        this.#description = description;
+    }
+
+    get url(): string {
+        return this.#url;
+    }
+
+    set url(url: string) {
+        this.#url = url;
+    }
+
+    get deliberationId(): string {
+        return this.#deliberationId;
+    }
+
+    set deliberationId(deliberationId: string) {
+        this.#deliberationId = deliberationId;
+    }
+
+    get topics(): Array<string> {
+        return this.#topics.values();
+    }
+
+    addTopic(topic: string): void {
+        this.#topics.add(topic);
+    }
+
+    get timestamp(): string {
+        return this.#timestamp;
+    }
+
+    set timestamp(timestamp: string) {
+        this.#timestamp = timestamp;
+    }
+
+    get uploaderAccountId(): string {
+        return this.#uploaderAccountId;
+    }
+
+    set uploaderAccountId(uploaderAccountId: string) {
+        this.#uploaderAccountId = uploaderAccountId;
+    }
 }
 
 /**
@@ -151,8 +326,85 @@ export class Resource {
  */
 @nearBindgen
 export class Result {
-    name: string;
+    #resultId: string;
+    #name: string;
+    #description: string;
+    #deliberationId: string;
+    #resultAgreement: string;
+    #checkoutUrl: string;
+    #timestamp: string;
+    #checkerAccountId: string;
     
+    constructor(name: string, description: string, deliberationId: string, resultAgreementId: string, checkoutUrl: string, timestamp: string, checkerAccountId: string) {
+        this.#resultId = deliberationId + resultAgreementId + checkoutUrl + timestamp + checkerAccountId;
+        this.#name = name;
+        this.#description = description;
+        this.#deliberationId = deliberationId;
+        this.#resultAgreement = resultAgreementId;
+        this.#checkoutUrl = checkoutUrl;
+        this.#timestamp = timestamp;
+        this.#checkerAccountId = checkerAccountId;
+    }
+
+    get resultId(): string {
+        return this.#resultId;
+    }
+
+    get name(): string {
+        return this.#name;
+    }
+
+    set name(name: string) {
+        this.#name = name;
+    }
+
+    get description(): string {
+        return this.#description;
+    }
+
+    set description(description: string) {
+        this.#description = description;
+    }
+
+    get deliberationId(): string {
+        return this.#deliberationId;
+    }
+
+    set deliberationId(deliberationId: string) {
+        this.#deliberationId = deliberationId;
+    }
+
+    get resultAgreement(): string {
+        return this.#resultAgreement;
+    }
+
+    set resultAgreement(resultAgreement: string) {
+        this.#resultAgreement = resultAgreement;
+    }
+
+    get checkoutUrl(): string {
+        return this.#checkoutUrl;
+    }
+
+    set checkoutUrl(checkoutUrl: string) {
+        this.#checkoutUrl = checkoutUrl;
+    }
+
+    get timestamp(): string {
+        return this.#timestamp;
+    }
+
+    set timestamp(timestamp: string) {
+        this.#timestamp = timestamp;
+    }
+
+    get checkerAccountId(): string {
+        return this.#checkerAccountId;
+    }
+
+    set checkerAccountId(checkerAccountId: string) {
+        this.#checkerAccountId = checkerAccountId;
+    }
 }
 
 /**
@@ -160,13 +412,80 @@ export class Result {
  */
 @nearBindgen
 export class FollowUp {
-    name: string;
-    
+    #followUpId: string;
+    #status: string;
+    #monitoringUrl: string;
+    #evaluationDate: string;
+    #deliberationId: string;
+    #resultId: string;
+    #monitorAccountId: string;
+
+    constructor(status: string, monitoringUrl: string, evaluationDate: string, deliberationId: string, resultId: string, monitorAccountId: string) {
+        this.#followUpId = deliberationId + resultId + evaluationDate + monitorAccountId;
+        this.#status = status;
+        this.#monitoringUrl = monitoringUrl;
+        this.#evaluationDate = evaluationDate;
+        this.#deliberationId = deliberationId;
+        this.#resultId = resultId;
+        this.#monitorAccountId = monitorAccountId;
+    }
+
+    get followUpId(): string {
+        return this.#followUpId;
+    }
+
+    get status(): string {
+        return this.#status;
+    }
+
+    set status(status: string) {
+        this.#status = status;
+    }
+
+    get monitoringUrl(): string {
+        return this.#monitoringUrl;
+    }
+
+    set monitoringUrl(monitoringUrl: string) {
+        this.#monitoringUrl = monitoringUrl;
+    }
+
+    get evaluationDate(): string {
+        return this.#evaluationDate;
+    }
+
+    set evaluationDate(evaluationDate: string) {
+        this.#evaluationDate = evaluationDate;
+    }
+
+    get deliberationId(): string {
+        return this.#deliberationId;
+    }
+
+    set deliberationId(deliberationId: string) {
+        this.#deliberationId = deliberationId;
+    }
+
+    get resultId(): string {
+        return this.#resultId;
+    }
+
+    set resultId(resultId: string) {
+        this.#resultId = resultId;
+    }
+
+    get monitorAccountId(): string {
+        return this.#monitorAccountId;
+    }
+
+    set monitorAccountId(monitorAccountId: string) {
+        this.#monitorAccountId = monitorAccountId;
+    }
 }
 
-export let userRegistry = ;;
-export let collectiveRegistry = ;;
-export let deliberationRegistry = ;
-export let resultRegistry = ;
-export let followupRegistry = ;
-export let resourceRegistry = ;
+export let userRegistry = new PersistentUnorderedMap<string, User>("user_registry");
+export let collectiveRegistry = new PersistentUnorderedMap<string, Collective>("collective_registry");
+export let deliberationRegistry = new PersistentUnorderedMap<string, Deliberation>("deliberation_registry");
+export let resultRegistry = new PersistentUnorderedMap<string, Result>("result_registry");
+export let followupRegistry = new PersistentUnorderedMap<string, FollowUp>("followup_registry");
+export let resourceRegistry = new PersistentUnorderedMap<string, Resource>("resource_registry");
