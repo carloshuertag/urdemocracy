@@ -4,7 +4,6 @@
 import {
     context, // visibility into account, contract and blockchain details
     logging, // append to the execution environment log (appears in JS Developer Console when using near-api-js)
-    math, // utility math functions for hashing using SHA and Keccak as well as pseudo-random data
 } from "near-sdk-as";
 import {userRegistry, collectiveRegistry, deliberationRegistry, resultRegistry, resourceRegistry, followupRegistry,
     User, Collective, Deliberation, Resource, Result, FollowUp, Timestamp } from "./model"
@@ -39,12 +38,12 @@ export class Contract {
             logging.log("Invalid parameters");
             return "";
         }
-        const exists: bool = collectiveRegistry.contains(name + type + infoUrl);
+        let collective: Collective = new Collective(name, type, infoUrl);
+        const exists: bool = collectiveRegistry.contains(collective.collectiveId);
         if(exists) {
             logging.log("Collective already in network");
             return "";
         }
-        let collective: Collective = new Collective(name, type, infoUrl);
         collectiveRegistry.set(collective.collectiveId, collective);
         return collective.collectiveId;
     }

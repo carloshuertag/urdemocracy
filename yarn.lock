@@ -109,11 +109,6 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@chainsafe/as-sha256@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@chainsafe/as-sha256/-/as-sha256-0.3.0.tgz#ba7d4b85a77c51a50c071856ea6ead4066583b74"
-  integrity sha512-X0Yaz1H9ByEelnrG2Q76aEmLmlsjZe8905n6Eez8wmV2E1TvBnY2AFYYy2U52dkaGrWrG4MHYKLo4NJcSqkFeg==
-
 "@eslint/eslintrc@^0.4.3":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.4.3.tgz#9e42981ef035beb3dd49add17acb96e8ff6f394c"

@@ -13,58 +13,58 @@ import {
  */
 @nearBindgen
 export class User {
-    #accountId: string;
-    #name: string;
-    #mail: string;
-    #password: string;
-    #collectives: PersistentSet<string>;
+    privateaccountId: string;
+    privatename: string;
+    privatemail: string;
+    privatepassword: string;
+    privatecollectives: PersistentSet<string>;
 
     constructor( accountId: string, name: string, mail: string, password: string) {
-        this.#accountId = accountId;
-        this.#name = name;
-        this.#mail = mail;
-        this.#password = password;
-        this.#collectives = new PersistentSet<string>(accountId + "_collectives");
+        this.privateaccountId = accountId;
+        this.privatename = name;
+        this.privatemail = mail;
+        this.privatepassword = password;
+        this.privatecollectives = new PersistentSet<string>(accountId + "_collectives");
     }
 
     get accountId(): string {
-        return this.#accountId;
+        return this.privateaccountId;
     }
 
     set accountId(accountId: string) {
-        this.#accountId = accountId;
+        this.privateaccountId = accountId;
     }
 
     get name(): string {
-        return this.#name;
+        return this.privatename;
     }
 
     set name(name: string) {
-        this.#name = name;
+        this.privatename = name;
     }
 
     get mail(): string {
-        return this.#mail;
+        return this.privatemail;
     }
 
     set email(mail: string) {
-        this.#mail = mail;
+        this.privatemail = mail;
     }
 
     get password(): string {
-        return this.#password;
+        return this.privatepassword;
     }
 
     set password(password: string) {
-        this.#password = password;
+        this.privatepassword = password;
     }
 
     addCollective(collectiveId: string): void {
-        this.#collectives.add(collectiveId);
+        this.privatecollectives.add(collectiveId);
     }
 
     get collectives(): Array<string> {
-        return this.#collectives.values();
+        return this.privatecollectives.values();
     }
 }
 
@@ -73,65 +73,66 @@ export class User {
  */
 @nearBindgen
 export class Collective {
-    #collectiveId: string;
-    #name: string;
-    #type: string;
-    #infoUrl: string;
-    #users: PersistentSet<string>;
-    #deliberations: PersistentSet<string>;
+    privatecollectiveId: string;
+    privatename: string;
+    privatetype: string;
+    privateinfoUrl: string;
+    privateusers: PersistentSet<string>;
+    privatedeliberations: PersistentSet<string>;
 
     constructor(name: string, type: string, infoUrl: string) {
-        let hash: Uint8Array = math.hash(name + type + infoUrl);
-        this.#collectiveId = math.sha256(hash).toString();
-        this.#name = name;
-        this.#type = type;
-        this.#infoUrl = infoUrl;
-        this.#users = new PersistentSet<string>(this.#collectiveId + "_users");
-        this.#deliberations = new PersistentSet<string>(this.#collectiveId + "_deliberations");
+        this.privatecollectiveId = "0x";
+        let tmp: Uint8Array = math.sha256(math.hash(name + type + infoUrl));
+        for(let i = 0; i < tmp.length; i++) this.privatecollectiveId += tmp[i].toString(16);
+        this.privatename = name;
+        this.privatetype = type;
+        this.privateinfoUrl = infoUrl;
+        this.privateusers = new PersistentSet<string>(this.privatecollectiveId + "_users");
+        this.privatedeliberations = new PersistentSet<string>(this.privatecollectiveId + "_deliberations");
     }
 
     get collectiveId(): string {
-        return this.#collectiveId;
+        return this.privatecollectiveId;
     }
 
     get name(): string {
-        return this.#name;
+        return this.privatename;
     }
 
     set name(name: string) {
-        this.#name = name;
+        this.privatename = name;
     }
 
     get infoUrl(): string {
-        return this.#infoUrl;
+        return this.privateinfoUrl;
     }
 
     set type(type: string) {
-        this.#type = type;
+        this.privatetype = type;
     }
 
     get type(): string {
-        return this.#type;
+        return this.privatetype;
     }
 
     set infoUrl(infoUrl: string) {
-        this.#infoUrl = infoUrl;
+        this.privateinfoUrl = infoUrl;
     }
 
     addUser(userId: string): void {
-        this.#users.add(userId);
+        this.privateusers.add(userId);
     }
 
     get users(): Array<string> {
-        return this.#users.values();
+        return this.privateusers.values();
     }
 
     addDeliberation(deliberationId: string): void {
-        this.#deliberations.add(deliberationId);
+        this.privatedeliberations.add(deliberationId);
     }
 
     get deliberations(): Array<string> {
-        return this.#deliberations.values();
+        return this.privatedeliberations.values();
     }
 }
 
@@ -140,105 +141,106 @@ export class Collective {
  */
 @nearBindgen
 export class Deliberation {
-    #deliberationId: string;
-    #name: string;
-    #topics: PersistentSet<string>;
-    #description: string;
-    #tool: string;
-    #collectiveId: string;
-    #resources: PersistentSet<string>;
-    #results: PersistentSet<string>;
-    #deliberationDate: string;
-    #hostAccountId: string;
+    privatedeliberationId: string;
+    privatename: string;
+    privatetopics: PersistentSet<string>;
+    privatedescription: string;
+    privatetool: string;
+    privatecollectiveId: string;
+    privateresources: PersistentSet<string>;
+    privateresults: PersistentSet<string>;
+    privatedeliberationDate: string;
+    privatehostAccountId: string;
 
     constructor(name: string, description: string, tool: string, collectiveId: string, deliberationDate: string, hostAccountId: string) {
-        let hash: Uint8Array = math.hash(collectiveId + deliberationDate + hostAccountId);
-        this.#deliberationId = math.sha256(hash).toString();
-        this.#name = name;
-        this.#topics = new PersistentSet<string>(this.#deliberationId + "_topics");
-        this.#description = description;
-        this.#tool = tool;
-        this.#collectiveId = collectiveId;
-        this.#resources = new PersistentSet<string>(this.#deliberationId + "_resources");
-        this.#results = new PersistentSet<string>(this.#deliberationId + "_results");
-        this.#deliberationDate = deliberationDate;
-        this.#hostAccountId = hostAccountId;
+        this.privatedeliberationId = "0x";
+        let tmp: Uint8Array = math.sha256(math.hash(collectiveId + deliberationDate + hostAccountId));
+        for(let i = 0; i < tmp.length; i++) this.privatedeliberationId += tmp[i].toString(16);
+        this.privatename = name;
+        this.privatetopics = new PersistentSet<string>(this.privatedeliberationId + "_topics");
+        this.privatedescription = description;
+        this.privatetool = tool;
+        this.privatecollectiveId = collectiveId;
+        this.privateresources = new PersistentSet<string>(this.privatedeliberationId + "_resources");
+        this.privateresults = new PersistentSet<string>(this.privatedeliberationId + "_results");
+        this.privatedeliberationDate = deliberationDate;
+        this.privatehostAccountId = hostAccountId;
     }
 
     get deliberationId(): string {
-        return this.#deliberationId;
+        return this.privatedeliberationId;
     }
 
     get name(): string {
-        return this.#name;
+        return this.privatename;
     }
 
     set name(name: string) {
-        this.#name = name;
+        this.privatename = name;
     }
 
     get topics(): Array<string> {
-        return this.#topics.values();
+        return this.privatetopics.values();
     }
 
     addTopic(topic: string): void {
-        this.#topics.add(topic);
+        this.privatetopics.add(topic);
     }
 
     get description(): string {
-        return this.#description;
+        return this.privatedescription;
     }
 
     set description(description: string) {
-        this.#description = description;
+        this.privatedescription = description;
     }
 
     get tool(): string {
-        return this.#tool;
+        return this.privatetool;
     }
 
     set tool(tool: string) {
-        this.#tool = tool;
+        this.privatetool = tool;
     }
 
     get collectiveId(): string {
-        return this.#collectiveId;
+        return this.privatecollectiveId;
     }
 
     set collectiveId(collectiveId: string) {
-        this.#collectiveId = collectiveId;
+        this.privatecollectiveId = collectiveId;
     }
 
     get resources(): Array<string> {
-        return this.#resources.values();
+        return this.privateresources.values();
     }
 
     addResource(resource: string): void {
-        this.#resources.add(resource);
+        this.privateresources.add(resource);
     }
 
     get results(): Array<string> {
-        return this.#results.values();
+        return this.privateresults.values();
     }
 
     addResult(result: string): void {
-        this.#results.add(result);
+        this.privateresults.add(result);
     }
 
     get deliberationDate(): string {
-        return this.#deliberationDate;
+        return this.privatedeliberationDate;
     }
 
     set deliberationDate(deliberationDate: string) {
-        this.#deliberationDate = deliberationDate;
+        this.privatedeliberationDate = deliberationDate;
     }
 
     get hostAccountId(): string {
-        return this.#hostAccountId;
+        return this.privatehostAccountId;
     }
 
     set hostAccountId(hostAccountId: string) {
-        this.#hostAccountId = hostAccountId;
+        this.privatehostAccountId = hostAccountId;
     }
 }
 
@@ -247,95 +249,96 @@ export class Deliberation {
  */
 @nearBindgen
 export class Resource {
-    #resourceId: string;
-    #name: string;
-    #type: string;
-    #description: string;
-    #url: string;
-    #deliberationId: string;
-    #topics: PersistentSet<string>;
-    #timestamp: Timestamp;
-    #uploaderAccountId: string;
+    privateresourceId: string;
+    privatename: string;
+    privatetype: string;
+    privatedescription: string;
+    privateurl: string;
+    privatedeliberationId: string;
+    privatetopics: PersistentSet<string>;
+    privatetimestamp: Timestamp;
+    privateuploaderAccountId: string;
 
     constructor(name: string, type: string, description: string, url: string, deliberationId: string, timestamp: Timestamp, uploaderAccountId: string) {
-        let hash: Uint8Array = math.hash(url + deliberationId + timestamp + uploaderAccountId);
-        this.#resourceId = math.sha256(hash).toString();
-        this.#name = name;
-        this.#type = type;
-        this.#description = description;
-        this.#url = url;
-        this.#deliberationId = deliberationId;
-        this.#topics = new PersistentSet<string>(this.#resourceId + "_topics");
-        this.#timestamp = timestamp;
-        this.#uploaderAccountId = uploaderAccountId;
+        this.privateresourceId = "0x";
+        let tmp: Uint8Array = math.sha256(math.hash(url + deliberationId + timestamp + uploaderAccountId));
+        for(let i = 0; i < tmp.length; i++) this.privateresourceId += tmp[i].toString(16);
+        this.privatename = name;
+        this.privatetype = type;
+        this.privatedescription = description;
+        this.privateurl = url;
+        this.privatedeliberationId = deliberationId;
+        this.privatetopics = new PersistentSet<string>(this.privateresourceId + "_topics");
+        this.privatetimestamp = timestamp;
+        this.privateuploaderAccountId = uploaderAccountId;
     }
 
     get resourceId(): string {
-        return this.#resourceId;
+        return this.privateresourceId;
     }
 
     get name(): string {
-        return this.#name;
+        return this.privatename;
     }
 
     set name(name: string) {
-        this.#name = name;
+        this.privatename = name;
     }
 
     get type(): string {
-        return this.#type;
+        return this.privatetype;
     }
 
     set type(type: string) {
-        this.#type = type;
+        this.privatetype = type;
     }
 
     get description(): string {
-        return this.#description;
+        return this.privatedescription;
     }
 
     set description(description: string) {
-        this.#description = description;
+        this.privatedescription = description;
     }
 
     get url(): string {
-        return this.#url;
+        return this.privateurl;
     }
 
     set url(url: string) {
-        this.#url = url;
+        this.privateurl = url;
     }
 
     get deliberationId(): string {
-        return this.#deliberationId;
+        return this.privatedeliberationId;
     }
 
     set deliberationId(deliberationId: string) {
-        this.#deliberationId = deliberationId;
+        this.privatedeliberationId = deliberationId;
     }
 
     get topics(): Array<string> {
-        return this.#topics.values();
+        return this.privatetopics.values();
     }
 
     addTopic(topic: string): void {
-        this.#topics.add(topic);
+        this.privatetopics.add(topic);
     }
 
     get timestamp(): Timestamp {
-        return this.#timestamp;
+        return this.privatetimestamp;
     }
 
     set timestamp(timestamp: Timestamp) {
-        this.#timestamp = timestamp;
+        this.privatetimestamp = timestamp;
     }
 
     get uploaderAccountId(): string {
-        return this.#uploaderAccountId;
+        return this.privateuploaderAccountId;
     }
 
     set uploaderAccountId(uploaderAccountId: string) {
-        this.#uploaderAccountId = uploaderAccountId;
+        this.privateuploaderAccountId = uploaderAccountId;
     }
 }
 
@@ -344,85 +347,86 @@ export class Resource {
  */
 @nearBindgen
 export class Result {
-    #resultId: string;
-    #name: string;
-    #description: string;
-    #deliberationId: string;
-    #checkoutUrl: string;
-    #timestamp: Timestamp;
-    #followUpId: string;
-    #checkerAccountId: string;
+    privateresultId: string;
+    privatename: string;
+    privatedescription: string;
+    privatedeliberationId: string;
+    privatecheckoutUrl: string;
+    privatetimestamp: Timestamp;
+    privatefollowUpId: string;
+    privatecheckerAccountId: string;
     
     constructor(name: string, description: string, deliberationId: string, followUpId: string, checkoutUrl: string, timestamp: Timestamp, checkerAccountId: string) {
-        let hash: Uint8Array = math.hash(deliberationId + followUpId + checkoutUrl + timestamp + checkerAccountId);
-        this.#resultId = math.sha256(hash).toString();
-        this.#name = name;
-        this.#description = description;
-        this.#deliberationId = deliberationId;
-        this.#followUpId = followUpId;
-        this.#checkoutUrl = checkoutUrl;
-        this.#timestamp = timestamp;
-        this.#checkerAccountId = checkerAccountId;
+        this.privateresultId = "0x";
+        let tmp: Uint8Array = math.sha256(math.hash(deliberationId + followUpId + timestamp + checkerAccountId));
+        for(let i = 0; i < tmp.length; i++) this.privateresultId += tmp[i].toString(16);
+        this.privatename = name;
+        this.privatedescription = description;
+        this.privatedeliberationId = deliberationId;
+        this.privatefollowUpId = followUpId;
+        this.privatecheckoutUrl = checkoutUrl;
+        this.privatetimestamp = timestamp;
+        this.privatecheckerAccountId = checkerAccountId;
     }
 
     get resultId(): string {
-        return this.#resultId;
+        return this.privateresultId;
     }
 
     get name(): string {
-        return this.#name;
+        return this.privatename;
     }
 
     set name(name: string) {
-        this.#name = name;
+        this.privatename = name;
     }
 
     get description(): string {
-        return this.#description;
+        return this.privatedescription;
     }
 
     set description(description: string) {
-        this.#description = description;
+        this.privatedescription = description;
     }
 
     get deliberationId(): string {
-        return this.#deliberationId;
+        return this.privatedeliberationId;
     }
 
     set deliberationId(deliberationId: string) {
-        this.#deliberationId = deliberationId;
+        this.privatedeliberationId = deliberationId;
     }
 
     get followUpId(): string {
-        return this.#followUpId;
+        return this.privatefollowUpId;
     }
 
-    set followUpId(resultAgreement: string) {
-        this.#followUpId = followUpId;
+    set followUpId(followUpId: string) {
+        this.privatefollowUpId = followUpId;
     }
 
     get checkoutUrl(): string {
-        return this.#checkoutUrl;
+        return this.privatecheckoutUrl;
     }
 
     set checkoutUrl(checkoutUrl: string) {
-        this.#checkoutUrl = checkoutUrl;
+        this.privatecheckoutUrl = checkoutUrl;
     }
 
     get timestamp(): Timestamp {
-        return this.#timestamp;
+        return this.privatetimestamp;
     }
 
     set timestamp(timestamp: Timestamp) {
-        this.#timestamp = timestamp;
+        this.privatetimestamp = timestamp;
     }
 
     get checkerAccountId(): string {
-        return this.#checkerAccountId;
+        return this.privatecheckerAccountId;
     }
 
     set checkerAccountId(checkerAccountId: string) {
-        this.#checkerAccountId = checkerAccountId;
+        this.privatecheckerAccountId = checkerAccountId;
     }
 }
 
@@ -431,75 +435,76 @@ export class Result {
  */
 @nearBindgen
 export class FollowUp {
-    #followUpId: string;
-    #status: string;
-    #monitoringUrl: string;
-    #evaluationDate: string;
-    #deliberationId: string;
-    #resultId: string;
-    #monitorAccountId: string;
+    privatefollowUpId: string;
+    privatestatus: string;
+    privatemonitoringUrl: string;
+    privateevaluationDate: string;
+    privatedeliberationId: string;
+    privateresultId: string;
+    privatemonitorAccountId: string;
 
     constructor(status: string, monitoringUrl: string, evaluationDate: string, deliberationId: string, resultId: string, monitorAccountId: string) {
-        let hash: Uint8Array = math.hash(deliberationId + resultId + evaluationDate + monitorAccountId);
-        this.#followUpId = math.sha256(hash).toString();
-        this.#status = status;
-        this.#monitoringUrl = monitoringUrl;
-        this.#evaluationDate = evaluationDate;
-        this.#deliberationId = deliberationId;
-        this.#resultId = resultId;
-        this.#monitorAccountId = monitorAccountId;
+        this.privatefollowUpId = "0x";
+        let tmp: Uint8Array = math.sha256(math.hash(deliberationId + resultId + evaluationDate + monitorAccountId));
+        for(let i = 0; i < tmp.length; i++) this.privatefollowUpId += tmp[i].toString(16);
+        this.privatestatus = status;
+        this.privatemonitoringUrl = monitoringUrl;
+        this.privateevaluationDate = evaluationDate;
+        this.privatedeliberationId = deliberationId;
+        this.privateresultId = resultId;
+        this.privatemonitorAccountId = monitorAccountId;
     }
 
     get followUpId(): string {
-        return this.#followUpId;
+        return this.privatefollowUpId;
     }
 
     get status(): string {
-        return this.#status;
+        return this.privatestatus;
     }
 
     set status(status: string) {
-        this.#status = status;
+        this.privatestatus = status;
     }
 
     get monitoringUrl(): string {
-        return this.#monitoringUrl;
+        return this.privatemonitoringUrl;
     }
 
     set monitoringUrl(monitoringUrl: string) {
-        this.#monitoringUrl = monitoringUrl;
+        this.privatemonitoringUrl = monitoringUrl;
     }
 
     get evaluationDate(): string {
-        return this.#evaluationDate;
+        return this.privateevaluationDate;
     }
 
     set evaluationDate(evaluationDate: string) {
-        this.#evaluationDate = evaluationDate;
+        this.privateevaluationDate = evaluationDate;
     }
 
     get deliberationId(): string {
-        return this.#deliberationId;
+        return this.privatedeliberationId;
     }
 
     set deliberationId(deliberationId: string) {
-        this.#deliberationId = deliberationId;
+        this.privatedeliberationId = deliberationId;
     }
 
     get resultId(): string {
-        return this.#resultId;
+        return this.privateresultId;
     }
 
     set resultId(resultId: string) {
-        this.#resultId = resultId;
+        this.privateresultId = resultId;
     }
 
     get monitorAccountId(): string {
-        return this.#monitorAccountId;
+        return this.privatemonitorAccountId;
     }
 
     set monitorAccountId(monitorAccountId: string) {
-        this.#monitorAccountId = monitorAccountId;
+        this.privatemonitorAccountId = monitorAccountId;
     }
 }
 
