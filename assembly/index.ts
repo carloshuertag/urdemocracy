@@ -33,7 +33,7 @@ export class Contract {
         return true;
     }
 
-    createCollective(name: string, type: string, infoUrl: string): string {
+    newCollective(name: string, type: string, infoUrl: string): string {
         if(name == "" || type == "" || infoUrl == "") {
             logging.log("Invalid parameters");
             return "";
@@ -60,137 +60,149 @@ export class Contract {
         return true;
     }
 
-    getUserCollectives(userId: string): Collective[] {
+    getUserCollectives(userId: string): string[] {
         const user: User | null = userRegistry.get(userId);
         if(!user) {
             logging.log("User not registered in the network");
             return [];
         }
-        let collectiveIds = user.collectives;
-        let collectives: Collective[] = [];
+        let collectiveIds: string[] = user.collectives;
+        let collectives: string[] = [];
         let collective: Collective | null;
-        collectiveIds.forEach(collectiveId => {
-            collective = collectiveRegistry.get(collectiveId);
-            if(collective) collectives.push(collective);
-        });
+        for(let i = 0; i < collectiveIds.length; i++) {
+            collective = collectiveRegistry.get(collectiveIds[i]);
+            if(collective) collectives.push(collective.toString());
+        }
         return collectives;
     }
 
-    getCollectiveDeliberations(collectiveId: string): Deliberation[] {
+    getCollectiveDeliberations(collectiveId: string): string[] {
         const collective: Collective | null = collectiveRegistry.get(collectiveId);
         if(!collective) {
             logging.log("Collective not registered in the network");
             return [];
         }
         let deliberationIds: string[] = collective.deliberations;
-        let deliberations: Deliberation[] = [];
+        let deliberations: string[] = [];
         let deliberation: Deliberation | null;
-        deliberationIds.forEach(deliberationId => {
-            deliberation = deliberationRegistry.get(deliberationId);
-            if(deliberation) deliberations.push(deliberation);
-        });
+        for(let i = 0; i < deliberationIds.length; i++) {
+            deliberation = deliberationRegistry.get(deliberationIds[i]);
+            if(deliberation) deliberations.push(deliberation.toString());
+        }
         return deliberations;
     }
 
     newCollectiveDeliberation(name: string, description: string, tool: string, collectiveId: string,
-        deliberationDate: string): Deliberation | null {
+        deliberationDate: string): string {
         const collective: Collective | null = collectiveRegistry.get(collectiveId);
         if(!collective) {
             logging.log("Collective not registered in the network");
-            return null;
+            return '';
         }
         const deliberation: Deliberation = new Deliberation(
             name, description, tool, collectiveId, deliberationDate, context.sender);
         deliberationRegistry.set(deliberation.deliberationId, deliberation);
         collective.addDeliberation(deliberation.deliberationId);
-        return deliberation;
+        return deliberation.toString();
     }
 
     newDeliberationResource(name: string, type: string, description: string, url: string, deliberationId: string,
-        timestamp: Timestamp): Resource | null {
+        timestamp: Timestamp): string {
         const deliberation: Deliberation | null = deliberationRegistry.get(deliberationId);
         if(!deliberation) {
             logging.log("Deliberation not registered in the network");
-            return null;
+            return '';
         }
         const resource: Resource = new Resource(name, type, description, url, deliberationId, timestamp, context.sender);
         resourceRegistry.set(resource.resourceId, resource);
         deliberation.addResource(resource.resourceId);
-        return resource;
+        return resource.toString();
     }
 
     newDeliberationResult(name: string, description: string, deliberationId: string, checkoutUrl: string,
-        timestamp: Timestamp, checkerAccountId: string): Result | null {
+        timestamp: Timestamp, checkerAccountId: string): string {
         const deliberation: Deliberation | null = deliberationRegistry.get(deliberationId);
         if(!deliberation) {
             logging.log("Deliberation not registered in the network");
-            return null;
+            return '';
         }
         const result: Result = new Result(name, description, deliberationId, "", checkoutUrl, timestamp, checkerAccountId);
         resultRegistry.set(result.resultId, result);
         deliberation.addResult(result.resultId);
-        return result;
+        return result.toString();
     }
 
     newResultFollopUp(status: string, monitoringUrl: string, evaluationDate: string, deliberationId: string,
-        resultId: string): FollowUp | null {
+        resultId: string): string {
         const result: Result | null = resultRegistry.get(resultId);
         if(!result) {
             logging.log("Result not registered in the network");
-            return null;
+            return '';
         }
         const followup: FollowUp = new FollowUp(
             status, monitoringUrl, evaluationDate, deliberationId, resultId, context.sender);
         followupRegistry.set(followup.followUpId, followup);
         result.followUpId = followup.followUpId;
-        return followup;
+        return followup.toString();
     }
 
-    getDeliberationResources(deliberationId: string): Resource[] {
+    getDeliberationResources(deliberationId: string): string[] {
         const deliberation: Deliberation | null = deliberationRegistry.get(deliberationId);
         if(!deliberation) {
             logging.log("Deliberation not registered in the network");
             return [];
         }
         let resourceIds: string[] = deliberation.resources;
-        let resources: Resource[] = [];
+        let resources: string[] = [];
         let resource: Resource | null;
-        resourceIds.forEach(resourceId => {
-            resource = resourceRegistry.get(resourceId);
-            if(resource) resources.push(resource);
-        });
+        for(let i = 0; i < resourceIds.length; i++) {
+            resource = resourceRegistry.get(resourceIds[i]);
+            if(resource) resources.push(resource.toString());
+        }
         return resources;
     }
 
-    getDeliberationResults(deliberationId: string): Result[] {
+    getDeliberationResults(deliberationId: string): string[] {
         const deliberation: Deliberation | null = deliberationRegistry.get(deliberationId);
         if(!deliberation) {
             logging.log("Deliberation not registered in the network");
             return [];
         }
         let resultIds: string[] = deliberation.results;
-        let results: Result[] = [];
+        let results: string[] = [];
         let result: Result | null;
-        resultIds.forEach(resultId => {
-            result = resultRegistry.get(resultId);
-            if(result) results.push(result);
-        });
+        for(let i = 0; i < resultIds.length; i++) {
+            result = resultRegistry.get(resultIds[i]);
+            if(result) results.push(result.toString());
+        }
         return results;
     }
 
-    getFollowUp(resultId: string) : FollowUp | null {
+    getFollowUp(resultId: string) : string {
         const result: Result | null = resultRegistry.get(resultId);
         if(!result) {
             logging.log("Result not registered in the network");
-            return null;
+            return '';
         }
         let followUpId :string = result.followUpId;
         let followUp: FollowUp | null = followupRegistry.get(followUpId);
         if(!followUp) {
             logging.log("FollowUp not registered in the network");
-            return null;
+            return '';
         }
-        return followUp;
+        return followUp.toString();
+    }
+
+    setFollowUp(followUpId: string, status: string, monitoringUrl: string): string {
+        const followUp: FollowUp | null = followupRegistry.get(followUpId);
+        if(!followUp) {
+            logging.log("FollowUp not registered in the network");
+            return '';
+        }
+        followUp.status = status;
+        followUp.monitoringUrl = monitoringUrl;
+        followupRegistry.set(followUpId, followUp);
+        return followUp.toString();
     }
 
 }

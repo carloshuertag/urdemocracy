@@ -47,7 +47,7 @@ export class User {
         return this.privatemail;
     }
 
-    set email(mail: string) {
+    set mail(mail: string) {
         this.privatemail = mail;
     }
 
@@ -65,6 +65,18 @@ export class User {
 
     get collectives(): Array<string> {
         return this.privatecollectives.values();
+    }
+
+    toString(): string {
+        let JSONString: string = '{ "accountId": " ' + this.privateaccountId + '", "name": "' +
+        this.privatename + '", "mail": \"' + this.privatemail + '", "password": "' +
+        this.privatepassword + '", "collectives": [';
+        let arr: string[] = this.privatecollectives.values();
+        if(arr.length == 0) return JSONString + '] }'; 
+        let lastIndex : i32 = arr.length - 1;
+        for(let i = 0; i < arr.length; i++) JSONString += (i == lastIndex) ?
+                '"' + arr[i] + '"]}' : '"' + arr[i] + '",';
+        return JSONString;
     }
 }
 
@@ -134,6 +146,24 @@ export class Collective {
     get deliberations(): Array<string> {
         return this.privatedeliberations.values();
     }
+
+    toString(): string {
+        let JSONString: string = '{"collectiveId": "' + this.privatecollectiveId + '", "name": "' +
+        this.privatename + '", "type": "' + this.privatetype + '", "infoUrl": "' +
+        this.privateinfoUrl + '", "users": [';
+        let arr: string[] = this.privateusers.values();
+        let lastIndex : i32 = arr.length - 1;
+        if(lastIndex == -1) JSONString += '], ';
+        else for(let i = 0; i < arr.length; i++) JSONString += (i == lastIndex) ?
+                '"' + arr[i] + '"], ' : '"' + arr[i] + '",';
+        JSONString += '"deliberations": [';
+        arr = this.privatedeliberations.values();
+        lastIndex = arr.length - 1;
+        if(lastIndex == -1) return JSONString + '] }';
+        for(let i = 0; i < arr.length; i++) JSONString += (i == lastIndex) ?
+                '"' + arr[i] + '"]}': '"' + arr[i] + '",';
+        return JSONString;
+    }
 }
 
 /**
@@ -152,7 +182,8 @@ export class Deliberation {
     privatedeliberationDate: string;
     privatehostAccountId: string;
 
-    constructor(name: string, description: string, tool: string, collectiveId: string, deliberationDate: string, hostAccountId: string) {
+    constructor(name: string, description: string, tool: string, collectiveId: string,
+            deliberationDate: string, hostAccountId: string) {
         this.privatedeliberationId = "0x";
         let tmp: Uint8Array = math.sha256(math.hash(collectiveId + deliberationDate + hostAccountId));
         for(let i = 0; i < tmp.length; i++) this.privatedeliberationId += tmp[i].toString(16);
@@ -241,6 +272,32 @@ export class Deliberation {
 
     set hostAccountId(hostAccountId: string) {
         this.privatehostAccountId = hostAccountId;
+    }
+
+    toString(): string {
+        let JSONString: string = '{"deliberatioinId":' + this.privatedeliberationId + ', "name": "' +
+        this.privatename + '", "topics": [';
+        let arr: string[] = this.privatetopics.values();
+        let lastIndex : i32 = arr.length - 1;
+        if(lastIndex == -1) JSONString += '], ';
+        else for(let i = 0; i < arr.length; i++) JSONString += (i == lastIndex) ?
+                '"' + arr[i] + '"], ' : '"' + arr[i] + '",';
+        JSONString += '"description": "' + this.privatedescription + '", "tool": "' + this.privatetool +
+        '", "collectiveId": "' + this.privatecollectiveId + '", "resources": [';
+        arr = this.privateresources.values();
+        lastIndex = arr.length - 1;
+        if(lastIndex == -1) JSONString += '], ';
+        else for(let i = 0; i < arr.length; i++) JSONString += (i == lastIndex) ?
+                '"' + arr[i] + '"], ' : '"' + arr[i] + '",';
+        JSONString += '"results": [';
+        arr = this.privateresults.values();
+        lastIndex = arr.length - 1;
+        if(lastIndex == -1) JSONString += '], ';
+        else for(let i = 0; i < arr.length; i++) JSONString += (i == lastIndex) ?
+                '"' + arr[i] + '"], ' : '"' + arr[i] + '",';
+        JSONString += '"deliberationDate": "' + this.privatedeliberationDate + '", "hostAccountId": "' +
+        this.privatehostAccountId + '"}';
+        return JSONString;
     }
 }
 
@@ -340,6 +397,20 @@ export class Resource {
     set uploaderAccountId(uploaderAccountId: string) {
         this.privateuploaderAccountId = uploaderAccountId;
     }
+
+    toString(): string {
+        let JSONString = '{"resourceId": "' + this.privateresourceId + '", "name": "' + this.privatename +
+        '", "type": "' + this.privatetype + '", "description": "' + this.privatedescription + '", "url": "' +
+        this.privateurl + '", "deliberationId": "' + this.privatedeliberationId + '", "topics": [';
+        let arr: string[] = this.privatetopics.values();
+        let lastIndex : i32 = arr.length - 1;
+        if(lastIndex == -1) JSONString += '], ';
+        else for(let i = 0; i < arr.length; i++) JSONString += (i == lastIndex) ?
+                '"' + arr[i] + '"], ' : '"' + arr[i] + '",';
+        JSONString += '"timestamp": "' + this.privatetimestamp + '", "uploaderAccountId": "' +
+        this.privateuploaderAccountId + '"}';
+        return JSONString;
+    }
 }
 
 /**
@@ -428,6 +499,14 @@ export class Result {
     set checkerAccountId(checkerAccountId: string) {
         this.privatecheckerAccountId = checkerAccountId;
     }
+
+    toString(): string {
+        let JSONString = '{"resultId": "' + this.privateresultId + '", "name": "' + this.privatename +
+        '", "description": "' + this.privatedescription + '", "deliberationId": "' + this.privatedeliberationId +
+        '", "followUpId": "' + this.privatefollowUpId + '", "checkoutUrl": "' + this.privatecheckoutUrl +
+        '", "timestamp": "' + this.privatetimestamp + '", "checkerAccountId": "' + this.privatecheckerAccountId + '"}';
+        return JSONString;
+    }
 }
 
 /**
@@ -505,6 +584,14 @@ export class FollowUp {
 
     set monitorAccountId(monitorAccountId: string) {
         this.privatemonitorAccountId = monitorAccountId;
+    }
+
+    toString(): string {
+        let JSONString = '{"followUpId": "' + this.privatefollowUpId + '", "status": "' + this.privatestatus +
+        '", "monitoringUrl": "' + this.privatemonitoringUrl + '", "evaluationDate": "' + this.privateevaluationDate +
+        '", "deliberationId": "' + this.privatedeliberationId + '", "resultId": "' + this.privateresultId +
+        '", "monitorAccountId": "' + this.privatemonitorAccountId + '"}';
+        return JSONString;
     }
 }
 
