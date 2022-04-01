@@ -4,7 +4,8 @@ export type Timestamp = u64;
  */
 import {
     PersistentUnorderedMap, // data structure that wraps storage to appear like an unordered Map
-    PersistentSet // data structure that wraps storage to appear like a Set
+    PersistentSet, // data structure that wraps storage to appear like a Set
+    math, // utility math functions for hashing using SHA and Keccak as well as pseudo-random data
 } from "near-sdk-as";
 
 /**
@@ -62,7 +63,7 @@ export class User {
         this.#collectives.add(collectiveId);
     }
 
-    getCollectives(): Array<string> {
+    get collectives(): Array<string> {
         return this.#collectives.values();
     }
 }
@@ -77,13 +78,16 @@ export class Collective {
     #type: string;
     #infoUrl: string;
     #users: PersistentSet<string>;
+    #deliberations: PersistentSet<string>;
 
     constructor(name: string, type: string, infoUrl: string) {
-        this.#collectiveId = name + type + infoUrl;
+        let hash: Uint8Array = math.hash(name + type + infoUrl);
+        this.#collectiveId = math.sha256(hash).toString();
         this.#name = name;
         this.#type = type;
         this.#infoUrl = infoUrl;
         this.#users = new PersistentSet<string>(this.#collectiveId + "_users");
+        this.#deliberations = new PersistentSet<string>(this.#collectiveId + "_deliberations");
     }
 
     get collectiveId(): string {
@@ -118,8 +122,16 @@ export class Collective {
         this.#users.add(userId);
     }
 
-    getUsers(): Array<string> {
+    get users(): Array<string> {
         return this.#users.values();
+    }
+
+    addDeliberation(deliberationId: string): void {
+        this.#deliberations.add(deliberationId);
+    }
+
+    get deliberations(): Array<string> {
+        return this.#deliberations.values();
     }
 }
 
@@ -140,7 +152,8 @@ export class Deliberation {
     #hostAccountId: string;
 
     constructor(name: string, description: string, tool: string, collectiveId: string, deliberationDate: string, hostAccountId: string) {
-        this.#deliberationId = collectiveId + deliberationDate + hostAccountId;
+        let hash: Uint8Array = math.hash(collectiveId + deliberationDate + hostAccountId);
+        this.#deliberationId = math.sha256(hash).toString();
         this.#name = name;
         this.#topics = new PersistentSet<string>(this.#deliberationId + "_topics");
         this.#description = description;
@@ -245,7 +258,8 @@ export class Resource {
     #uploaderAccountId: string;
 
     constructor(name: string, type: string, description: string, url: string, deliberationId: string, timestamp: Timestamp, uploaderAccountId: string) {
-        this.#resourceId = url + deliberationId + timestamp + uploaderAccountId;
+        let hash: Uint8Array = math.hash(url + deliberationId + timestamp + uploaderAccountId);
+        this.#resourceId = math.sha256(hash).toString();
         this.#name = name;
         this.#type = type;
         this.#description = description;
@@ -334,17 +348,18 @@ export class Result {
     #name: string;
     #description: string;
     #deliberationId: string;
-    #resultAgreement: string;
     #checkoutUrl: string;
     #timestamp: Timestamp;
+    #followUpId: string;
     #checkerAccountId: string;
     
-    constructor(name: string, description: string, deliberationId: string, resultAgreementId: string, checkoutUrl: string, timestamp: Timestamp, checkerAccountId: string) {
-        this.#resultId = deliberationId + resultAgreementId + checkoutUrl + timestamp + checkerAccountId;
+    constructor(name: string, description: string, deliberationId: string, followUpId: string, checkoutUrl: string, timestamp: Timestamp, checkerAccountId: string) {
+        let hash: Uint8Array = math.hash(deliberationId + followUpId + checkoutUrl + timestamp + checkerAccountId);
+        this.#resultId = math.sha256(hash).toString();
         this.#name = name;
         this.#description = description;
         this.#deliberationId = deliberationId;
-        this.#resultAgreement = resultAgreementId;
+        this.#followUpId = followUpId;
         this.#checkoutUrl = checkoutUrl;
         this.#timestamp = timestamp;
         this.#checkerAccountId = checkerAccountId;
@@ -378,12 +393,12 @@ export class Result {
         this.#deliberationId = deliberationId;
     }
 
-    get resultAgreement(): string {
-        return this.#resultAgreement;
+    get followUpId(): string {
+        return this.#followUpId;
     }
 
-    set resultAgreement(resultAgreement: string) {
-        this.#resultAgreement = resultAgreement;
+    set followUpId(resultAgreement: string) {
+        this.#followUpId = followUpId;
     }
 
     get checkoutUrl(): string {
@@ -425,7 +440,8 @@ export class FollowUp {
     #monitorAccountId: string;
 
     constructor(status: string, monitoringUrl: string, evaluationDate: string, deliberationId: string, resultId: string, monitorAccountId: string) {
-        this.#followUpId = deliberationId + resultId + evaluationDate + monitorAccountId;
+        let hash: Uint8Array = math.hash(deliberationId + resultId + evaluationDate + monitorAccountId);
+        this.#followUpId = math.sha256(hash).toString();
         this.#status = status;
         this.#monitoringUrl = monitoringUrl;
         this.#evaluationDate = evaluationDate;
