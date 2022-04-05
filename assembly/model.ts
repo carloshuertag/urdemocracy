@@ -318,7 +318,7 @@ export class Resource {
 
     constructor(name: string, type: string, description: string, url: string, deliberationId: string, timestamp: Timestamp, uploaderAccountId: string) {
         this.privateresourceId = "0x";
-        let tmp: Uint8Array = math.sha256(math.hash(url + deliberationId + timestamp + uploaderAccountId));
+        let tmp: Uint8Array = math.sha256(math.hash(url + deliberationId + timestamp.toString() + uploaderAccountId));
         for(let i = 0; i < tmp.length; i++) this.privateresourceId += tmp[i].toString(16);
         this.privatename = name;
         this.privatetype = type;
@@ -407,7 +407,7 @@ export class Resource {
         if(lastIndex == -1) JSONString += '], ';
         else for(let i = 0; i < arr.length; i++) JSONString += (i == lastIndex) ?
                 '"' + arr[i] + '"], ' : '"' + arr[i] + '",';
-        JSONString += '"timestamp": "' + this.privatetimestamp + '", "uploaderAccountId": "' +
+        JSONString += '"timestamp": "' + this.privatetimestamp.toString() + '", "uploaderAccountId": "' +
         this.privateuploaderAccountId + '"}';
         return JSONString;
     }
@@ -429,7 +429,7 @@ export class Result {
     
     constructor(name: string, description: string, deliberationId: string, followUpId: string, checkoutUrl: string, timestamp: Timestamp, checkerAccountId: string) {
         this.privateresultId = "0x";
-        let tmp: Uint8Array = math.sha256(math.hash(deliberationId + followUpId + timestamp + checkerAccountId));
+        let tmp: Uint8Array = math.sha256(math.hash(deliberationId + followUpId + timestamp.toString() + checkerAccountId));
         for(let i = 0; i < tmp.length; i++) this.privateresultId += tmp[i].toString(16);
         this.privatename = name;
         this.privatedescription = description;
@@ -504,7 +504,7 @@ export class Result {
         let JSONString = '{"resultId": "' + this.privateresultId + '", "name": "' + this.privatename +
         '", "description": "' + this.privatedescription + '", "deliberationId": "' + this.privatedeliberationId +
         '", "followUpId": "' + this.privatefollowUpId + '", "checkoutUrl": "' + this.privatecheckoutUrl +
-        '", "timestamp": "' + this.privatetimestamp + '", "checkerAccountId": "' + this.privatecheckerAccountId + '"}';
+        '", "timestamp": "' + this.privatetimestamp.toString() + '", "checkerAccountId": "' + this.privatecheckerAccountId + '"}';
         return JSONString;
     }
 }

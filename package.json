@@ -6,18 +6,19 @@
     "scripts": {
         "build": "asb",
         "build:debug": "asb --target debug",
-        "test": "asp --nologo"
+        "test": "asp --nologo",
+        "start": "env-cmd -f ./neardev/dev-account.env parcel src/*.html"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/huerta2502/urdemocracy.git"
     },
     "keywords": [
-        "'participatory",
-        "democracy'",
-        "'blockchain'",
-        "'near",
-        "protocol'"
+        "participatory",
+        "democracy",
+        "blockchain",
+        "near",
+        "protocol"
     ],
     "author": "huerta2502",
     "license": "MIT",
@@ -26,9 +27,13 @@
     },
     "homepage": "https://github.com/huerta2502/urdemocracy#readme",
     "dependencies": {
-        "near-sdk-as": "^3.2.3"
+        "near-api-js": "^0.43.1",
+        "regenerator-runtime": "^0.13.9"
     },
     "devDependencies": {
+        "parcel-bundler": "~1.12.5",
+        "near-sdk-as": "^3.2.3",
+        "env-cmd": "^10.1.0",
         "@types/jest": "^27.4.1",
         "shelljs": "^0.8.5"
     }

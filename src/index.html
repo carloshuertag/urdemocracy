@@ -3,21 +3,219 @@
 
 <head>
     <meta charset="utf-8">
-    <!--bootstrap-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>urdemocracy</title>
 </head>
 
 <body>
-    <header>
+    <header class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <span class="fs-4">urdemocracy</span>
+        </a>
 
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li>
+                <a href="https://www.github.com/huerta2502/urdemocracy" class="nav-link px-2 link-dark">
+                    <svg class="bi me-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                </svg> Github
+                </a>
+            </li>
+            <li>
+                <a href="https://www.github.com/huerta2502" class="nav-link px-2 link-dark">
+                    <svg class="bi me-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-person" viewBox="0 0 16 16">
+                        <path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+                        <path d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg> Author
+                </a>
+            </li>
+            <li>
+                <a href="https://www.near.org" class="nav-link px-2 link-dark">
+                    <svg class="bi me-2" height="20" viewBox="0 0 76 20" width="76" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                    <path d="m38.0449 4.17778v11.66662c0 .0889-.0666.1778-.1777.1778h-1.2223c-.5555 0-1.0888-.2889-1.4-.7555l-5.5111-8.51114.1778 4.24444v4.8667c0 .0889-.0667.1777-.1778.1777h-1.6c-.0889 0-.1777-.0666-.1777-.1777v-11.68892c0-.08889.0666-.17778.1777-.17778h1.2c.5556 0 1.0889.28889 1.4.75556l5.5111 8.48884-.1777-4.2444v-4.82222c0-.08889.0666-.17778.1777-.17778h1.6c.1334 0 .2.06667.2.17778z"></path>
+                    <path d="m54.444 16h-1.6889c-.1111 0-.2-.1111-.1555-.2222l4.4889-11.62224c.0444-.08889.1333-.15556.2222-.15556h2.1333c.1111 0 .2.06667.2223.15556l4.5111 11.62224c.0444.1111-.0445.2222-.1556.2222h-1.6889c-.0666 0-.1333-.0444-.1555-.1111l-3.6223-9.55557c-.0444-.13333-.2666-.13333-.3111 0l-3.6222 9.55557c-.0444.0667-.1111.1111-.1778.1111z"></path>
+                    <path d="m75.9557 15.7333-3.3778-4.3111c1.9111-.3555 3.0222-1.64442 3.0222-3.6222 0-2.26667-1.4667-3.8-4.0889-3.8h-4.7111c-.1333 0-.2444.11111-.2444.24444 0 .88889.7111 1.6 1.6 1.6h3.1777c1.5778 0 2.3334.8 2.3334 1.97778s-.7334 1.97778-2.3334 1.97778h-4.4889c-.1333 0-.2444.11111-.2444.2444v5.7778c0 .0889.0667.1778.1778.1778h1.6c.0889 0 .1778-.0667.1778-.1778v-4.2889h1.8444l2.9333 3.8223c.3111.4222.8.6444 1.3334.6444h1.2222c.0889 0 .1555-.1556.0667-.2667z"></path>
+                    <path d="m49.3776 4h-7.4444c-.1334 0-.2223.08889-.2223.22222 0 .88889.7334 1.62222 1.6223 1.62222h6.0444c.0889 0 .1778-.06666.1778-.17777v-1.51111c-.0222-.08889-.0889-.15556-.1778-.15556zm0 10.1556h-5.5555c-.0889 0-.1778-.0667-.1778-.1778v-3c0-.0889.0666-.1778.1778-.1778h5.1333c.0889 0 .1778-.0667.1778-.1778v-1.51109c0-.08889-.0667-.17778-.1778-.17778h-7c-.1333 0-.2445.11111-.2445.24445v6.55552c0 .1334.1112.2445.2445.2445h7.4222c.0889 0 .1778-.0667.1778-.1778v-1.5111c-.0222-.0667-.0889-.1333-.1778-.1333z"></path>
+                    <path d="m16.0444 1.02222-4.1777 6.2c-.2889.42222.2666.93334.6666.57778l4.1111-3.57778c.1112-.08889.2667-.02222.2667.13334v11.17774c0 .1556-.2.2223-.2889.1111l-12.44442-14.888844c-.4-.488889-.97778-.755556-1.62222-.755556h-.44445c-1.155554 0-2.11111.955556-2.11111 2.13333v15.73337c0 1.1777.955556 2.1333 2.13333 2.1333.73334 0 1.42223-.3778 1.82223-1.0222l4.17777-6.2c.28889-.4222-.26666-.9334-.66666-.5778l-4.11111 3.5556c-.11112.0888-.26667.0222-.26667-.1334v-11.15553c0-.15556.2-.22223.28889-.11111l12.44442 14.88884c.4.4889 1 .7556 1.6222.7556h.4445c1.1778 0 2.1333-.9556 2.1333-2.1333v-15.73337c-.0222-1.177774-.9778-2.13333-2.1555-2.13333-.7334 0-1.4223.377778-1.8223 1.02222z"></path>
+                </svg>
+                </a>
+            </li>
+        </ul>
+
+        <div class="col-md-3 text-end">
+            <button id="signout" type="button" class="btn btn-secondary">Sign out your NEAR Wallet</button>
+            <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#signinModal">Sign in</button>
+            <!-- Modal -->
+            <div class="modal fade" id="signinModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content rounded-5 shadow">
+                        <div class="modal-header p-5 pb-4 border-bottom-0">
+                            <h2 class="fw-bold mb-0">Sign in to your account</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-5 pt-0">
+                            <form class="">
+                                <div id="signinNEAR">
+                                    <h2 class="fs-5 fw-bold mb-3">Create or import existing NEAR Account</h2>
+                                    <button id="signinNEARbtn" class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4" type="button">
+                                        <svg class="bi me-2" height="20" viewBox="0 0 76 20" width="76" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                                            <path d="m38.0449 4.17778v11.66662c0 .0889-.0666.1778-.1777.1778h-1.2223c-.5555 0-1.0888-.2889-1.4-.7555l-5.5111-8.51114.1778 4.24444v4.8667c0 .0889-.0667.1777-.1778.1777h-1.6c-.0889 0-.1777-.0666-.1777-.1777v-11.68892c0-.08889.0666-.17778.1777-.17778h1.2c.5556 0 1.0889.28889 1.4.75556l5.5111 8.48884-.1777-4.2444v-4.82222c0-.08889.0666-.17778.1777-.17778h1.6c.1334 0 .2.06667.2.17778z"></path>
+                                            <path d="m54.444 16h-1.6889c-.1111 0-.2-.1111-.1555-.2222l4.4889-11.62224c.0444-.08889.1333-.15556.2222-.15556h2.1333c.1111 0 .2.06667.2223.15556l4.5111 11.62224c.0444.1111-.0445.2222-.1556.2222h-1.6889c-.0666 0-.1333-.0444-.1555-.1111l-3.6223-9.55557c-.0444-.13333-.2666-.13333-.3111 0l-3.6222 9.55557c-.0444.0667-.1111.1111-.1778.1111z"></path>
+                                            <path d="m75.9557 15.7333-3.3778-4.3111c1.9111-.3555 3.0222-1.64442 3.0222-3.6222 0-2.26667-1.4667-3.8-4.0889-3.8h-4.7111c-.1333 0-.2444.11111-.2444.24444 0 .88889.7111 1.6 1.6 1.6h3.1777c1.5778 0 2.3334.8 2.3334 1.97778s-.7334 1.97778-2.3334 1.97778h-4.4889c-.1333 0-.2444.11111-.2444.2444v5.7778c0 .0889.0667.1778.1778.1778h1.6c.0889 0 .1778-.0667.1778-.1778v-4.2889h1.8444l2.9333 3.8223c.3111.4222.8.6444 1.3334.6444h1.2222c.0889 0 .1555-.1556.0667-.2667z"></path>
+                                            <path d="m49.3776 4h-7.4444c-.1334 0-.2223.08889-.2223.22222 0 .88889.7334 1.62222 1.6223 1.62222h6.0444c.0889 0 .1778-.06666.1778-.17777v-1.51111c-.0222-.08889-.0889-.15556-.1778-.15556zm0 10.1556h-5.5555c-.0889 0-.1778-.0667-.1778-.1778v-3c0-.0889.0666-.1778.1778-.1778h5.1333c.0889 0 .1778-.0667.1778-.1778v-1.51109c0-.08889-.0667-.17778-.1778-.17778h-7c-.1333 0-.2445.11111-.2445.24445v6.55552c0 .1334.1112.2445.2445.2445h7.4222c.0889 0 .1778-.0667.1778-.1778v-1.5111c-.0222-.0667-.0889-.1333-.1778-.1333z"></path>
+                                            <path d="m16.0444 1.02222-4.1777 6.2c-.2889.42222.2666.93334.6666.57778l4.1111-3.57778c.1112-.08889.2667-.02222.2667.13334v11.17774c0 .1556-.2.2223-.2889.1111l-12.44442-14.888844c-.4-.488889-.97778-.755556-1.62222-.755556h-.44445c-1.155554 0-2.11111.955556-2.11111 2.13333v15.73337c0 1.1777.955556 2.1333 2.13333 2.1333.73334 0 1.42223-.3778 1.82223-1.0222l4.17777-6.2c.28889-.4222-.26666-.9334-.66666-.5778l-4.11111 3.5556c-.11112.0888-.26667.0222-.26667-.1334v-11.15553c0-.15556.2-.22223.28889-.11111l12.44442 14.88884c.4.4889 1 .7556 1.6222.7556h.4445c1.1778 0 2.1333-.9556 2.1333-2.1333v-15.73337c-.0222-1.177774-.9778-2.13333-2.1555-2.13333-.7334 0-1.4223.377778-1.8223 1.02222z"></path>
+                                        </svg>Account
+                                    </button>
+                                    <hr class="my-4">
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control rounded-4" id="signinEmail" placeholder="name@example.com">
+                                    <label for="signinEmail">Email address</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control rounded-4" id="signinPassword" placeholder="Password" minlength="8">
+                                    <label for="signinPassword">Password</label>
+                                </div>
+                                <button id="signinBtn" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">
+                                    Sign in
+                                    <span id="signinSpinner" class="spinner-border spinner-border-sm" style="width: 1em;height: 1em;display: none;" role="status" aria-hidden="true"></span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
+            <!-- Modal -->
+            <div class="modal fade" id="signupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content rounded-5 shadow">
+                        <div class="modal-header p-5 pb-4 border-bottom-0">
+                            <!-- <h5 class="modal-title">Modal title</h5> -->
+                            <h2 class="fw-bold mb-0">Sign up for free</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-5 pt-0">
+                            <form class="">
+                                <div id="signupNEAR">
+                                    <h2 class="fs-5 fw-bold mb-3">Create or import existing NEAR Account</h2>
+                                    <button id="signupNEARbtn" class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4" type="button">
+                                        <svg class="bi me-2" height="20" viewBox="0 0 76 20" width="76" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                                            <path d="m38.0449 4.17778v11.66662c0 .0889-.0666.1778-.1777.1778h-1.2223c-.5555 0-1.0888-.2889-1.4-.7555l-5.5111-8.51114.1778 4.24444v4.8667c0 .0889-.0667.1777-.1778.1777h-1.6c-.0889 0-.1777-.0666-.1777-.1777v-11.68892c0-.08889.0666-.17778.1777-.17778h1.2c.5556 0 1.0889.28889 1.4.75556l5.5111 8.48884-.1777-4.2444v-4.82222c0-.08889.0666-.17778.1777-.17778h1.6c.1334 0 .2.06667.2.17778z"></path>
+                                            <path d="m54.444 16h-1.6889c-.1111 0-.2-.1111-.1555-.2222l4.4889-11.62224c.0444-.08889.1333-.15556.2222-.15556h2.1333c.1111 0 .2.06667.2223.15556l4.5111 11.62224c.0444.1111-.0445.2222-.1556.2222h-1.6889c-.0666 0-.1333-.0444-.1555-.1111l-3.6223-9.55557c-.0444-.13333-.2666-.13333-.3111 0l-3.6222 9.55557c-.0444.0667-.1111.1111-.1778.1111z"></path>
+                                            <path d="m75.9557 15.7333-3.3778-4.3111c1.9111-.3555 3.0222-1.64442 3.0222-3.6222 0-2.26667-1.4667-3.8-4.0889-3.8h-4.7111c-.1333 0-.2444.11111-.2444.24444 0 .88889.7111 1.6 1.6 1.6h3.1777c1.5778 0 2.3334.8 2.3334 1.97778s-.7334 1.97778-2.3334 1.97778h-4.4889c-.1333 0-.2444.11111-.2444.2444v5.7778c0 .0889.0667.1778.1778.1778h1.6c.0889 0 .1778-.0667.1778-.1778v-4.2889h1.8444l2.9333 3.8223c.3111.4222.8.6444 1.3334.6444h1.2222c.0889 0 .1555-.1556.0667-.2667z"></path>
+                                            <path d="m49.3776 4h-7.4444c-.1334 0-.2223.08889-.2223.22222 0 .88889.7334 1.62222 1.6223 1.62222h6.0444c.0889 0 .1778-.06666.1778-.17777v-1.51111c-.0222-.08889-.0889-.15556-.1778-.15556zm0 10.1556h-5.5555c-.0889 0-.1778-.0667-.1778-.1778v-3c0-.0889.0666-.1778.1778-.1778h5.1333c.0889 0 .1778-.0667.1778-.1778v-1.51109c0-.08889-.0667-.17778-.1778-.17778h-7c-.1333 0-.2445.11111-.2445.24445v6.55552c0 .1334.1112.2445.2445.2445h7.4222c.0889 0 .1778-.0667.1778-.1778v-1.5111c-.0222-.0667-.0889-.1333-.1778-.1333z"></path>
+                                            <path d="m16.0444 1.02222-4.1777 6.2c-.2889.42222.2666.93334.6666.57778l4.1111-3.57778c.1112-.08889.2667-.02222.2667.13334v11.17774c0 .1556-.2.2223-.2889.1111l-12.44442-14.888844c-.4-.488889-.97778-.755556-1.62222-.755556h-.44445c-1.155554 0-2.11111.955556-2.11111 2.13333v15.73337c0 1.1777.955556 2.1333 2.13333 2.1333.73334 0 1.42223-.3778 1.82223-1.0222l4.17777-6.2c.28889-.4222-.26666-.9334-.66666-.5778l-4.11111 3.5556c-.11112.0888-.26667.0222-.26667-.1334v-11.15553c0-.15556.2-.22223.28889-.11111l12.44442 14.88884c.4.4889 1 .7556 1.6222.7556h.4445c1.1778 0 2.1333-.9556 2.1333-2.1333v-15.73337c-.0222-1.177774-.9778-2.13333-2.1555-2.13333-.7334 0-1.4223.377778-1.8223 1.02222z"></path>
+                                        </svg>Account
+                                    </button>
+                                    <hr class="my-4">
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control rounded-4" id="signupName" placeholder="Name">
+                                    <label for="signupName">Name</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control rounded-4" id="signupEmail" placeholder="name@example.com">
+                                    <label for="signupEmail">Email address</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control rounded-4" id="signupPassword" placeholder="Password" minlength="8">
+                                    <label for="signupPassword">Password</label>
+                                </div>
+                                <button id="signupBtn" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">
+                                    Sign up
+                                    <span id="signupSpinner" class="spinner-border spinner-border-sm" style="width: 1em;height: 1em;display: none;" role="status" aria-hidden="true"></span>
+                                </button>
+                                <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
     <main>
-
+        <div class="px-4 py-5 my-5 text-center">
+            <h1 class="display-5 fw-bold">urdemocracy</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">
+                    urdemocracy is a software tool to help decision making process in political societies focused on a participatory democracy paradigm using near protocol blockchain.
+                </p>
+            </div>
+        </div>
+        <div class="container px-4">
+            <h1 class="pb-2">Participatory democracy axes</h1>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                <div class="col d-flex align-items-start">
+                    <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                        <svg class="bi" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-info-square" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                    </div>
+                    <div>
+                        <h2>Informative axis</h2>
+                        <p>Organizational, financial, regulatory, scheduling an contact information.</p>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="bi" width="1em" height="1em" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
+                        <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                        <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z"/>
+                    </svg>
+                    </div>
+                    <div>
+                        <h2>Deliberative axis</h2>
+                        <p>Discussion, debates, forums, propositions</p>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-ui-radios" viewBox="0 0 16 16">
+                            <path d="M7 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1zM0 12a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm7-1.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1zm0-5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zM3 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>Participatory axis</h2>
+                        <p>Consulations, Votations, Survays.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <h2 class="pb-2">
+                    <div class="icon-square text-dark flex-shrink-0 me-3">
+                        <svg class="bi" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                </svg> Evaluation extra feature</h2>
+                </div>
+                <p>Validate the actions on participation results.</p>
+            </div>
+        </div>
     </main>
-    <footer>
-
+    <footer class="container py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item">
+                <a href="https://github.com/huerta2502" class="nav-link px-2 text-muted">
+                    <svg class="bi me-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                </svg> Author
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="https://gdsc.community.dev/national-polytechnic-institute-of-mexico-escom/" class="nav-link px-2 text-muted">
+                    <img src="https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-dsc/contentbuilder/logo_dark_horizontal_097s7oa.svg" class="svg" alt="Google Developer Student Clubs logo" style="height: 1em;">                    DSC ESCOM IPN
+                </a>
+            </li>
+        </ul>
+        <p class="text-center text-muted">&copy; 2022 urdemocracy</p>
     </footer>
-    <script src="main.js"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <script src="./main.js"></script>
 </body>
 
 </html>

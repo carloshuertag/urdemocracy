@@ -33,6 +33,15 @@ export class Contract {
         return true;
     }
 
+    getUser(userId: string): string {
+        const user: User | null = userRegistry.get(userId);
+        if(!user) {
+            logging.log('User not registered in the network');
+            return '';
+        }
+        return user.toString();
+    }
+
     newCollective(name: string, type: string, infoUrl: string): string {
         if(name == "" || type == "" || infoUrl == "") {
             logging.log("Invalid parameters");
