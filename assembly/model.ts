@@ -68,7 +68,7 @@ export class User {
     }
 
     toString(): string {
-        let JSONString: string = '{ "accountId": " ' + this.privateaccountId + '", "name": "' +
+        let JSONString: string = '{ "accountId": " '+ this.privateaccountId + '", "name": "' +
         this.privatename + '", "mail": \"' + this.privatemail + '", "password": "' +
         this.privatepassword + '", "collectives": [';
         let arr: string[] = this.privatecollectives.values();
@@ -148,7 +148,7 @@ export class Collective {
     }
 
     toString(): string {
-        let JSONString: string = '{"collectiveId": "' + this.privatecollectiveId + '", "name": "' +
+        let JSONString: string = '{"collectiveId": "'+ this.privatecollectiveId + '", "name": "' +
         this.privatename + '", "type": "' + this.privatetype + '", "infoUrl": "' +
         this.privateinfoUrl + '", "users": [';
         let arr: string[] = this.privateusers.values();
@@ -275,7 +275,7 @@ export class Deliberation {
     }
 
     toString(): string {
-        let JSONString: string = '{"deliberatioinId":' + this.privatedeliberationId + ', "name": "' +
+        let JSONString: string = '{"deliberatioinId":'+ this.privatedeliberationId + ', "name": "' +
         this.privatename + '", "topics": [';
         let arr: string[] = this.privatetopics.values();
         let lastIndex : i32 = arr.length - 1;
@@ -399,7 +399,7 @@ export class Resource {
     }
 
     toString(): string {
-        let JSONString = '{"resourceId": "' + this.privateresourceId + '", "name": "' + this.privatename +
+        let JSONString = '{"resourceId": "'+ this.privateresourceId + '", "name": "' + this.privatename +
         '", "type": "' + this.privatetype + '", "description": "' + this.privatedescription + '", "url": "' +
         this.privateurl + '", "deliberationId": "' + this.privatedeliberationId + '", "topics": [';
         let arr: string[] = this.privatetopics.values();
@@ -501,7 +501,7 @@ export class Result {
     }
 
     toString(): string {
-        let JSONString = '{"resultId": "' + this.privateresultId + '", "name": "' + this.privatename +
+        let JSONString = '{"resultId": "'+ this.privateresultId + '", "name": "' + this.privatename +
         '", "description": "' + this.privatedescription + '", "deliberationId": "' + this.privatedeliberationId +
         '", "followUpId": "' + this.privatefollowUpId + '", "checkoutUrl": "' + this.privatecheckoutUrl +
         '", "timestamp": "' + this.privatetimestamp.toString() + '", "checkerAccountId": "' + this.privatecheckerAccountId + '"}';
@@ -587,7 +587,7 @@ export class FollowUp {
     }
 
     toString(): string {
-        let JSONString = '{"followUpId": "' + this.privatefollowUpId + '", "status": "' + this.privatestatus +
+        let JSONString = '{"followUpId": "'+ this.privatefollowUpId + '", "status": "' + this.privatestatus +
         '", "monitoringUrl": "' + this.privatemonitoringUrl + '", "evaluationDate": "' + this.privateevaluationDate +
         '", "deliberationId": "' + this.privatedeliberationId + '", "resultId": "' + this.privateresultId +
         '", "monitorAccountId": "' + this.privatemonitorAccountId + '"}';
