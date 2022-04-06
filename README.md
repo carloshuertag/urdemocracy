@@ -1,8 +1,8 @@
 # urdemocracy
 ==================
 > Project developed for GSC ESCOM IPN NEAR Protocol blockchain course.
-urdemocracy is a software tool to help decision making process in political societies focused on a participatory democracy paradigm using near protocol blockchain.
-==================
+## urdemocracy is a software tool to help decision making process in political societies focused on a participatory democracy paradigm using near protocol blockchain.
+
 # urdemocracy lets you:
 1. Create user account
 2. Create collectives
