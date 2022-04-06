@@ -1,5 +1,5 @@
 # urdemocracy
-==================
+====================
 > Project developed for GSC ESCOM IPN NEAR Protocol blockchain course.
 ## urdemocracy is a software tool to help decision making process in political societies focused on a participatory democracy paradigm using near protocol blockchain.
 
@@ -31,28 +31,28 @@
     ```
 
 ### Clone this repository
-```bash
+    ```bash
     git clone https://github.com/huerta2502/urdemocracy
     cd urdemocracy
-```
+    ```
 
 ### Install project dependecies and compile the smart contract
-```bash
+    ```bash
     yarn install
     yarn build:contract:debug
-```
+    ```
 
 ### Deploy the contract to the NEAR testnet
-```bash
+    ```bash
     yarn dev:deploy:contract
-```
+    ```
 
 ### Install frontend dependeices
-```bash
+    ```bash
     yarn install
-```
+    ```
 
 ### Execute frontend
-```bash
+    ```bash
     yarn start
-```
+    ```
