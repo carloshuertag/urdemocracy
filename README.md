@@ -29,10 +29,11 @@ urdemocracy is a software tool to help decision making process in political soci
     ```bash
     near login
     ```
+
 ### Clone this repository
     ```bash
-git clone https://github.com/paul-cruz/WeFund
-cd urdemocracy
+    git clone https://github.com/paul-cruz/WeFund
+    cd urdemocracy
     ```
 
 ### Install project dependecies and compile the smart contract
@@ -42,16 +43,16 @@ cd urdemocracy
     ```
 
 ### Deploy the contract to the NEAR testnet
-```bash
-yarn dev:deploy:contract
-```
+    ```bash
+    yarn dev:deploy:contract
+    ```
 
 ### Install frontend dependeices
-```bash
+    ```bash
     yarn install
-```
+    ```
 
 ### Execute frontend
-```bash
+    ```bash
     yarn start
-```
+    ```
