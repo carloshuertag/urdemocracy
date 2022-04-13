@@ -20,6 +20,8 @@ function udsignin(e) {
         return;
     }
     document.getElementById("signinSpinner").style.display = "inline-block";
+    document.getElementById("signinBtn").disabled = true;
+    document.getElementById("signinBtn").classList.add("disabled");
     window.walletAccount.account().functionCall({
         contractId: window.nearConfig.contractName,
         methodName: 'login',
@@ -37,6 +39,8 @@ function udsignin(e) {
             alert('Account logged in successfully');
             window.location.href = './profile.html';
         } else alert(response.receipts_outcome[0].outcome.logs[0]);
+        document.getElementById("signinBtn").disabled = false;
+        document.getElementById("signinBtn").classList.remove("disabled");
     });
 }
 
@@ -54,6 +58,8 @@ function udsignup(e) {
         return;
     }
     document.getElementById("signupSpinner").style.display = "inline-block";
+    document.getElementById("signupBtn").disabled = true;
+    document.getElementById("signupBtn").classList.add("disabled");
     window.walletAccount.account().functionCall({
         contractId: window.nearConfig.contractName,
         methodName: 'signin',
@@ -72,6 +78,8 @@ function udsignup(e) {
             alert("Account created successfully");
             window.location.href = './profile.html';
         } else alert(response.receipts_outcome[0].outcome.logs[0]);
+        document.getElementById("signupBtn").disabled = false;
+        document.getElementById("signupBtn").classList.remove("disabled");
     });
 }
 
